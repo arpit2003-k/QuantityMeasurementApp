@@ -44,6 +44,7 @@ Each use case was developed independently and merged after validation.
 
 # Use Case Implementation
 
+
 ## UC1 — Feet Equality
 
 ### Goal
@@ -72,3 +73,4 @@ Validated the equals contract:
 * First step into TDD-based design
 
 ---
+
