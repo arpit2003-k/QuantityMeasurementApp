@@ -73,4 +73,50 @@ Validated the equals contract:
 * First step into TDD-based design
 
 ---
+## UC2 — Inches Equality
+
+### Goal
+
+Add support for Inches unit comparison.
+
+### Tests Implemented
+
+Repeated equality validation for:
+
+* Inches = Inches
+
+### Implementation
+
+* Created `Inches` class
+* Added `value` field
+* Overridden `equals()` method
+
+### Design Observation
+
+* Identified duplicated logic between Feet and Inches
+* Violated DRY principle
+* Recognized need for abstraction in upcoming refactoring
+
+---
+
+## Current System Capabilities
+
+The application can now:
+
+* Compare Feet measurements
+* Compare Inches measurements
+* Safely validate equality contracts
+* Maintain full test coverage
+
+---
+
+## Learning Outcomes
+
+* Practical implementation of TDD
+* Equality contract validation
+* Incremental feature growth
+* Early detection of design smells
+* Foundation ready for abstraction in next UC
+
+---
 
