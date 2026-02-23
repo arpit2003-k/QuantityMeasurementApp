@@ -2,8 +2,9 @@ package com.apps.quantitymeasurement;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import com.apps.quantitymeasurement.QuantityMeasurementApp.Feet;
 
+import com.apps.quantitymeasurement.QuantityMeasurementApp.Feet;
+import com.apps.quantitymeasurement.QuantityMeasurementApp.Inches;
 public class QuantityMeasurementAppTest {
  
 	@Test
@@ -38,5 +39,14 @@ public class QuantityMeasurementAppTest {
 	        Feet f1 = new Feet(1.0);
 	        assertTrue(f1.equals(f1));
 	    }
+	    
+	  // UC2 testing for Feet and Inches Equality
+
+		@Test
+		public void testInchesEquality_SameValue() {
+			Inches i1 = new Inches(1.0);
+			Inches i2 = new Inches(1.0);
+			assertTrue(i1.equals(i2));
+		}
 	
 }
