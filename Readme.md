@@ -1,4 +1,4 @@
-# Quantity Measurement App
+# Quantity Measurement App 
 
 ## Branch: feature/UC2-InchesEquality
 
@@ -66,3 +66,4 @@ This highlighted the need for abstraction in future use cases.
 * Recognized importance of refactoring in TDD
 
 ---
+
