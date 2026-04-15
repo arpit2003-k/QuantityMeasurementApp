@@ -27,22 +27,28 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             throws IOException, ServletException {
 
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        
+        // Handle different attribute names for Google and GitHub
+        String email = oAuth2User.getAttribute("email");
+        String name = oAuth2User.getAttribute("name");
+        
+        if (email == null) {
+            // Fallback for GitHub if email is not public
+            email = oAuth2User.getAttribute("login") + "@github.com";
+        }
+        
+        if (name == null) {
+            name = oAuth2User.getAttribute("login");
+        }
 
-        String emailTemp = ((OAuth2User) authentication.getPrincipal())
-    	        .getAttribute("email");
+        final String finalEmail = email;
+        final String finalName = name != null ? name : "OAuth User";
 
-    	if (emailTemp == null) {
-    	    emailTemp = ((OAuth2User) authentication.getPrincipal())
-    	            .getAttribute("login") + "@github.com";
-    	}
-
-    	final String email = emailTemp;
-
-        User user = repository.findByEmail(email)
+        User user = repository.findByEmail(finalEmail)
                 .orElseGet(() -> repository.save(
                         User.builder()
-                                .email(email)
-                                .name("GitHub User")
+                                .email(finalEmail)
+                                .name(finalName)
                                 .mobileNumber("0000000000")
                                 .password("oauth")
                                 .build()
@@ -50,10 +56,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         String token = jwtService.generateToken(user);
 
-        // RETURN TOKEN IN RESPONSE
-        response.setContentType("application/json");
-        response.getWriter().write(
-                "{\"token\": \"" + token + "\", \"message\": \"OAuth login successful\"}"
-        );
+        // Redirect back to Angular app with the token
+        String redirectUrl = "http://localhost:4200/auth?token=" + token;
+        response.sendRedirect(redirectUrl);
     }
 }
